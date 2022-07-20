@@ -15,7 +15,7 @@ def dbCreate():
         f = open("hosts.db", "x")
     except: 
         pass
-    hostCur.execute('''CREATE TABLE IF NOT EXISTS hosts
+    hostCur.execute('''CREATE TABLE hosts
                     (ipAddr, friendlyName)''')
     hostCon.commit()
     hostCon.close()

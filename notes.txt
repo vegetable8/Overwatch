@@ -1,1 +1,3 @@
 ## To create Database , python3 setup.py --dbcreate
+
+## To add hosts , python3 setup.py --addhost

@@ -1,6 +1,7 @@
 from ast import Return
 import os, sys
 import sqlite3
+import numpy as np
 
 
 ## Database
@@ -8,16 +9,22 @@ import sqlite3
 hostCon = sqlite3.connect('hosts.db')
 hostCur = hostCon.cursor()
 
-hostCur.execute("SELECT * FROM hosts")
-rows = hostCur.fetchall()
-for hosts in rows:
-    response = os.system("ping -c 1 " + hosts)
 
-    if response == 0:
-        print (hosts, 'is up!')
-    else:
-        print (hosts, 'is down!')
+def pingHosts():    
+    queryDbForHosts = hostCur.execute("SELECT ipAddr FROM hosts")
+    ipToScan = queryDbForHosts.fetchall() # Returns Tuple, not array
+    arr = np.asarray(ipToScan)
 
-# Working Ping
+
+    for hosts in arr:
+        response = os.system("ping -c 1 " + hosts)
+
+        if response == 0:
+            print (hosts, 'is up!')
+        else:
+            print (hosts, 'is down!')
+
+pingHosts()
+
 
 
