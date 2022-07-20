@@ -14,7 +14,7 @@ for hosts in rows:
     response = os.system("ping -c 1 " + hosts)
 
     if response == 0:
-        print (hosts, 'is up! cool')
+        print (hosts, 'is up!')
     else:
         print (hosts, 'is down!')
 
